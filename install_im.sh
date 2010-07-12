@@ -63,8 +63,8 @@ try_download http://www.ijg.org/files/jpegsrc.v8b.tar.gz
 try_download ftp://ftp.remotesensing.org/pub/libtiff/tiff-3.9.2.tar.gz
 try_download http://"$SF_MIRROR".dl.sourceforge.net/project/lcms/lcms/2.0/lcms2-2.0a.tar.gz
 try_download http://ghostscript.googlecode.com/files/ghostscript-8.71.tar.gz
-try_download ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-1.4.2.tar.gz
-try_download ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-6.6.2-4.tar.gz
+try_download http://voxel.dl.sourceforge.net/project/libpng/01-libpng-master/1.4.3/libpng-1.4.3.tar.xz
+try_download ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-6.6.3-0.tar.gz
 
 # Decompress applications.
 decompress_applications
@@ -73,7 +73,7 @@ echo "Starting..."
 
 # LibPNG.
 # Official PNG reference library.
-cd libpng-1.4.2
+cd libpng-1.4.3
 ./configure --prefix=$CONFIGURE_PREFIX
 make
 sudo make install
@@ -141,7 +141,7 @@ cd ..
 cd ImageMagick-6.6.2-4
 export CPPFLAGS=-I$CONFIGURE_PREFIX/include
 export LDFLAGS=-L$CONFIGURE_PREFIX/lib
-./configure --prefix=$CONFIGURE_PREFIX $IMAGEMAGICK_ARGUMENTS --with-gs-font-dir=$CONFIGURE_GS_FONT/fonts
+./configure --prefix=$CONFIGURE_PREFIX $IMAGEMAGICK_ARGUMENTS --with-gs-font-dir=$CONFIGURE_GS_FONT/fonts --disable-static --with-modules --without-perl  --with-quantum-depth=8  --with-bzlib=no --with-libiconv
 make
 sudo make install
 cd ..
